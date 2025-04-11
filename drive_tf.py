@@ -3,6 +3,7 @@ import eventlet
 import numpy as np
 from flask import Flask
 from keras.models import load_model
+from keras.losses import MeanSquaredError
 import base64
 from io import BytesIO
 from PIL import Image
@@ -51,7 +52,8 @@ def send_control(steering_angle, throttle):
 
 
 if __name__ == '__main__':
-    model = load_model('model/reproduced-vanilla-model.h5')
+    model = load_model('model/reproduced-vanilla-model.h5',
+                       custom_objects={'mse': MeanSquaredError()})
     print("Model loaded")
     app = socketio.Middleware(sio, app)
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
