@@ -1,0 +1,15 @@
+# an Implementation of NVIDIA PilotNet
+
+Reference:
+https://github.com/rslim087a/Self-Driving-Car-Course-Codes
+https://github.com/rslim087a/track
+
+### setup
+use devcontainer
+
+### To Test Self-driving Model
+run `python3 drive_torch.py` or `python3 drive_tf.py`to deploy the self driving ws server
+run the simulator executable in auto mode and it will connect to server automatically
+
+### Model Training Process
+two ipynb files are two standalone implementations of training using tensorflow or pytorch
