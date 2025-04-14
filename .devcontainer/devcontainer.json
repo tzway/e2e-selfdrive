@@ -4,7 +4,8 @@
 	"image": "mcr.microsoft.com/devcontainers/python:1-3.9-buster",
 	// 允许容器访问主机 GPU
 	"runArgs": [
-		"--gpus=all"
+		"--gpus=all",
+		"--shm-size=2gb"
 	],
 	// 容器启动后执行的命令
 	"postCreateCommand": "sudo apt update && sudo apt install -y libgl1-mesa-glx && pip install opencv-contrib-python numpy matplotlib tensorflow[and-cuda] keras python-engineio==3.13.2 python-socketio==4.6.1 Flask eventlet scikit-learn notebook pandas && pip install git+https://github.com/imaug/imaug.git && pip3 install torch==2.8.0.dev20250411+cu128 torchvision==0.22.0.dev20250411+cu128 torchaudio==2.6.0.dev20250411+cu128 --index-url https://download.pytorch.org/whl/nightly/cu128",
