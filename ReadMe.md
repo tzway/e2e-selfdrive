@@ -6,6 +6,7 @@ https://github.com/rslim087a/track
 
 ### Model Input and Output
 Input: H×W×C 66 * 200 * 3 Raw pixel values [0, 255] linearly scaled to [0, 1]
+
 Output: Steering angle as real-valued scalar
 
 ### development environment setup
