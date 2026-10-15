@@ -1,18 +1,18 @@
 // .devcontainer/devcontainer.json
 {
 	"name": "e2e dev",
-	"image": "mcr.microsoft.com/devcontainers/python:1-3.9-buster",
-	// 允许容器访问主机 GPU
+	// 多架构镜像,Docker 按主机平台自动选择:arm64(Apple Silicon)/ amd64(x86)
+	"image": "mcr.microsoft.com/devcontainers/python:1-3.9-bookworm",
+	// GPU 有则用、无则跳过:检测到 NVIDIA GPU 时自动追加 --gpus=all,Mac 上不会带
+	"hostRequirements": {
+		"gpu": "optional"
+	},
+	// 训练时防止 shm 过小导致崩溃
 	"runArgs": [
-		"--gpus=all",
 		"--shm-size=2gb"
 	],
-	// 容器启动后执行的命令
-	"postCreateCommand": "sudo apt update && sudo apt install -y libgl1-mesa-glx && pip install opencv-contrib-python numpy matplotlib tensorflow[and-cuda] keras python-engineio==3.13.2 python-socketio==4.6.1 Flask eventlet scikit-learn notebook pandas && pip install git+https://github.com/imaug/imaug.git && pip3 install torch==2.8.0.dev20250411+cu128 torchvision==0.22.0.dev20250411+cu128 torchaudio==2.6.0.dev20250411+cu128 --index-url https://download.pytorch.org/whl/nightly/cu128",
-	// 可选：开放端口（如果你有 Flask 服务等）
-	// "forwardPorts": [5000],
-	// 你可以启用 root 权限执行（不推荐长期这样）
-	// "remoteUser": "root"
+	// 依赖安装脚本会按架构 / GPU 自动选择 CPU 或 CUDA 版本
+	"postCreateCommand": "bash .devcontainer/postCreate.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
